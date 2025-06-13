@@ -41,30 +41,27 @@ const Dashboard = () => {
         <div key={key} className="mb-5">
           <h5 className="fw-bold mb-3">{label}</h5>
 
-          {data[key]?.length > 0 ? (
+          {Object.values(data[key] || {}).flat().length > 0 ? (
             <div className="d-flex flex-wrap gap-3">
-              {data[key].slice(0, 3).map((q, idx) => (
-                <div
-                  key={idx}
-                  className={`card shadow ${darkMode ? 'bg-secondary text-white' : 'bg-white text-dark'}`}
-                  style={{ width: '18rem' }}
-                >
-                  <div className="card-body">
-                    <h6 className="card-title fw-semibold">{q.title}</h6>
-                    <p className={`card-text ${darkMode ? 'text-light' : 'text-muted'}`} style={{ fontSize: '0.9rem' }}>
-                      {(q.description || '').slice(0, 80)}...
-                    </p>
+              {Object.values(data[key])
+                .flat()
+                .slice(0, 3)
+                .map((q, idx) => (
+                  <div
+                    key={idx}
+                    className={`card shadow ${darkMode ? 'bg-secondary text-white' : 'bg-white text-dark'}`}
+                    style={{ width: '18rem' }}
+                  >
+                    <div className="card-body">
+                      <h6 className="card-title fw-semibold">{q.title}</h6>
+                      <p className={`card-text ${darkMode ? 'text-light' : 'text-muted'}`} style={{ fontSize: '0.9rem' }}>
+                        {(q.explanation || '').slice(0, 80)}...
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
-              <div
-                className="d-flex align-items-center justify-content-center"
-                style={{ width: '18rem' }}
-              >
-                <button
-                  className="btn btn-outline-primary"
-                  onClick={() => navigate(`/${key}`)}
-                >
+                ))}
+              <div className="d-flex align-items-center justify-content-center" style={{ width: '18rem' }}>
+                <button className="btn btn-outline-primary" onClick={() => navigate(`/${key}`)}>
                   View more
                 </button>
               </div>
