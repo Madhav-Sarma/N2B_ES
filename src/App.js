@@ -14,7 +14,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<NavBar />}>
+        <Route path="/" element={<Dashboard />}>
           <Route path='dashboard' element={<Dashboard />} />
           <Route path="codechef" element={<CodeChef />} />
           <Route path="codeforces" element={<CodeForces />} />
