@@ -9,7 +9,7 @@ import CSES from './pages/CSES/CSES';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Atcoder from './pages/Atcoder/Atcoder';
 import GFG from './pages/gfg/gfg';
-
+import CSESProblemPage from './pages/CSES/CSESProblemPage';
 function App() {
   return (
     <Router>
@@ -22,6 +22,8 @@ function App() {
           <Route path="cses" element={<CSES />} />
           <Route path="atcoder" element={<Atcoder />} />
           <Route path="GeeksforGeeks" element={<GFG/>} />
+          <Route path="/cses/solution/:slug" element={<CSESProblemPage />} />
+
           {/* Add more pages inside this layout */}
         </Route>
       </Routes>

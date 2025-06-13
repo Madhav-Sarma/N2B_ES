@@ -1,29 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FiSettings, FiSun, FiMoon } from 'react-icons/fi';
 import { TbCircleLetterC } from 'react-icons/tb';
 import { SiCodeforces, SiCodechef, SiLeetcode, SiGeeksforgeeks } from 'react-icons/si';
 import { GiHorseHead } from 'react-icons/gi';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
-import { MdHome } from "react-icons/md";
-
+import { useNavigate, useLocation, Outlet } from 'react-router-dom';
+import { MdHome } from 'react-icons/md';
+import { useTheme } from '../../context/ThemeContext';
 
 function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem('darkMode');
-    return saved !== null ? JSON.parse(saved) : true;
-  });
-
-  const toggleMode = () => setDarkMode((prev) => !prev);
-
-  useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
-    document.body.className = darkMode ? 'bg-dark text-white' : 'bg-light text-dark';
-  }, [darkMode]);
+  const { darkMode, toggleTheme } = useTheme();  // ⬅️ Use context
 
   const theme = darkMode ? 'bg-dark text-white' : 'bg-light text-dark';
   const sidebarTheme = darkMode ? 'bg-dark border-end border-secondary' : 'bg-light border-end';
@@ -89,7 +77,7 @@ function NavBar() {
       {/* Toggle Button */}
       <div className="position-fixed top-0 end-0 p-3" style={{ zIndex: 1050 }}>
         <button
-          onClick={toggleMode}
+          onClick={toggleTheme}
           style={toggleButtonStyle}
           title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
         >

@@ -1,0 +1,39 @@
+{
+  "All Problems": [
+    {
+      "title": "weird",
+      "slug": "weird",
+      "solution": "/CSES/CSES-Solutions/1)weird.py",
+      "explanation": "/CSES/CSES-Explanation/1)weird.md",
+      "createdAt": "2025-06-13T06:56:35.311Z"
+    },
+    {
+      "title": "missing number",
+      "slug": "missing-number",
+      "solution": "/CSES/CSES-Solutions/2)missing_number.py",
+      "explanation": "/CSES/CSES-Explanation/2)missing_number.md",
+      "createdAt": "2025-06-13T06:56:35.316Z"
+    },
+    {
+      "title": "repetitions",
+      "slug": "repetitions",
+      "solution": "/CSES/CSES-Solutions/3)repetitions.py",
+      "explanation": "/CSES/CSES-Explanation/3)repetitions.md",
+      "createdAt": "2025-06-13T06:56:35.316Z"
+    },
+    {
+      "title": "increasing array",
+      "slug": "increasing-array",
+      "solution": "/CSES/CSES-Solutions/4)increasing_array.py",
+      "explanation": "/CSES/CSES-Explanation/4)increasing_array.md",
+      "createdAt": "2025-06-13T06:56:35.316Z"
+    },
+    {
+      "title": "permutations",
+      "slug": "permutations",
+      "solution": "/CSES/CSES-Solutions/5)permutations.py",
+      "explanation": "/CSES/CSES-Explanation/5)permutations.md",
+      "createdAt": "2025-06-13T06:56:35.316Z"
+    }
+  ]
+}
