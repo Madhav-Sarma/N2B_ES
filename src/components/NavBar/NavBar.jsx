@@ -11,16 +11,20 @@ import { useTheme } from '../../context/ThemeContext';
 function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { darkMode, toggleTheme } = useTheme();  // ⬅️ Use context
+  const { darkMode, toggleTheme } = useTheme();
 
   const theme = darkMode ? 'bg-dark text-white' : 'bg-light text-dark';
-  const sidebarTheme = darkMode ? 'bg-dark border-end border-secondary' : 'bg-light border-end';
-  const headerTheme = darkMode ? 'bg-dark border-bottom border-secondary' : 'bg-light border-bottom';
+  const sidebarTheme = darkMode
+    ? 'bg-dark border-end border-secondary'
+    : 'bg-light border-end';
+  const headerTheme = darkMode
+    ? 'bg-dark border-bottom border-secondary'
+    : 'bg-light border-bottom';
 
   const iconButtonStyle = {
-    width: '50px',
-    height: '50px',
-    borderRadius: '12px',
+    width: 50,
+    height: 50,
+    borderRadius: 12,
     border: 'none',
     cursor: 'pointer',
     backgroundColor: 'transparent',
@@ -31,26 +35,27 @@ function NavBar() {
   };
 
   const getIconButtonStyle = (page) => {
-    const currentPath = location.pathname === '/' ? '/dashboard' : location.pathname;
-    const isActive = currentPath === `/${page}`;
-    
+    const current = location.pathname === '/' ? '/dashboard' : location.pathname;
+    const isActive = current === `/${page}`;
     return {
       ...iconButtonStyle,
-      backgroundColor: isActive 
-        ? (darkMode ? '#495057' : '#e9ecef')
+      backgroundColor: isActive
+        ? darkMode ? '#495057' : '#e9ecef'
         : 'transparent',
-      border: isActive 
+      border: isActive
         ? `2px solid ${darkMode ? '#dee2e6' : '#495057'}`
         : '2px solid transparent',
-      boxShadow: isActive 
-        ? (darkMode ? '0 0 0 1px rgba(255,255,255,0.1)' : '0 0 0 1px rgba(0,0,0,0.1)')
+      boxShadow: isActive
+        ? darkMode
+          ? '0 0 0 1px rgba(255,255,255,0.1)'
+          : '0 0 0 1px rgba(0,0,0,0.1)'
         : 'none',
     };
   };
 
   const toggleButtonStyle = {
-    width: '40px',
-    height: '40px',
+    width: 40,
+    height: 40,
     borderRadius: '50%',
     border: 'none',
     cursor: 'pointer',
@@ -68,53 +73,56 @@ function NavBar() {
     { name: 'GeeksforGeeks', icon: <SiGeeksforgeeks size={24} />, page: 'geeksforgeeks' },
   ];
 
-  const handlePlatformClick = (platform) => {
-    navigate(`/${platform.page}`);
-  };
-
   return (
-    <div className={`vh-100 vw-100 d-flex ${theme}`}>
-      {/* Toggle Button */}
-      <div className="position-fixed top-0 end-0 p-3" style={{ zIndex: 1050 }}>
-        <button
-          onClick={toggleTheme}
-          style={toggleButtonStyle}
-          title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-        >
-          {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
-        </button>
-      </div>
-
+    <div className={`d-flex ${theme}`} style={{ height: '100vh', overflow: 'hidden' }}>
       {/* Sidebar */}
-      <aside className={`h-100 d-flex flex-column align-items-center py-4 ${sidebarTheme}`} style={{ width: '80px' }}>
+      <aside
+        className={`d-flex flex-column align-items-center py-4 ${sidebarTheme}`}
+        style={{ width: 80 }}
+      >
         <div className="d-flex flex-column gap-3 mb-4">
-          {platformIcons.map((platform, index) => (
+          {platformIcons.map((pl, i) => (
             <button
-              key={index}
-              className={`${darkMode ? 'text-white' : 'text-dark'}`}
-              style={getIconButtonStyle(platform.page)}
-              title={platform.name}
-              onClick={() => handlePlatformClick(platform)}
+              key={i}
+              style={getIconButtonStyle(pl.page)}
+              title={pl.name}
+              onClick={() => navigate(`/${pl.page}`)}
+              className={darkMode ? 'text-white' : 'text-dark'}
             >
-              {platform.icon}
+              {pl.icon}
             </button>
           ))}
         </div>
-
         <div className="mt-auto">
-          <button className={`${darkMode ? 'text-white' : 'text-dark'}`} style={iconButtonStyle} title="Settings">
+          <button
+            style={iconButtonStyle}
+            title="Settings"
+            className={darkMode ? 'text-white' : 'text-dark'}
+          >
             <FiSettings size={24} />
           </button>
         </div>
       </aside>
 
-      {/* Main Content */}
-      <div className="w-100 h-100 d-flex flex-column">
-        <header className={`d-flex align-items-center px-4 ${headerTheme}`} style={{ height: '70px' }}>
+      {/* Main area */}
+      <div className="d-flex flex-column flex-fill">
+        {/* Header with toggle */}
+        <header
+          className={`d-flex align-items-center justify-content-between px-4 ${headerTheme}`}
+          style={{ height: 70, flexShrink: 0 }}
+        >
           <h4 className="mb-0 fw-bold">ExSo</h4>
+          <button
+            onClick={toggleTheme}
+            style={toggleButtonStyle}
+            title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          >
+            {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
+          </button>
         </header>
 
-        <main className="flex-fill p-4 overflow-auto">
+        {/* Only this scrolls */}
+        <main className="flex-fill p-4" style={{ overflowY: 'auto' }}>
           <Outlet />
         </main>
       </div>

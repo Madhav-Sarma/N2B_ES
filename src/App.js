@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route,Navigate } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import Dashboard from './pages/Dashboard/Dashboard';
 import CodeChef from './pages/CodeChef/CodeChef';
@@ -15,7 +15,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<NavBar />}>
-          <Route index element={<Dashboard />} />  // ← this ensures "/" loads Dashboard
+          <Route index element={<Navigate to="/dashboard" replace />} /> 
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="codechef" element={<CodeChef />} />
           <Route path="codeforces" element={<CodeForces />} />
@@ -25,7 +25,6 @@ function App() {
           <Route path="atcoder" element={<Atcoder />} />
           <Route path="geeksforgeeks" element={<GFG />} />
         </Route>
-
       </Routes>
     </Router>
   );
